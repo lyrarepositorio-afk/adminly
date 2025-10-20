@@ -1,0 +1,902 @@
+local Players = game:GetService("Players")
+local UserInputService = game:GetService("UserInputService")
+local TweenService = game:GetService("TweenService")
+
+local player = Players.LocalPlayer
+local playerGui = player:WaitForChild("PlayerGui")
+
+local screenGui = Instance.new("ScreenGui")
+screenGui.Name = "LyraAdminGui"
+screenGui.ResetOnSpawn = false
+screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+screenGui.Parent = playerGui
+
+local mainButton = Instance.new("TextButton")
+mainButton.Name = "MainButton"
+mainButton.Size = UDim2.new(0, 60, 0, 60)
+mainButton.Position = UDim2.new(0.5, -30, 0, 20)
+mainButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainButton.BorderSizePixel = 0
+mainButton.Font = Enum.Font.GothamBold
+mainButton.Text = "LY"
+mainButton.TextColor3 = Color3.fromRGB(255, 100, 200)
+mainButton.TextSize = 24
+mainButton.TextStrokeTransparency = 0
+mainButton.Parent = screenGui
+
+local buttonCorner = Instance.new("UICorner")
+buttonCorner.CornerRadius = UDim.new(1, 0)
+buttonCorner.Parent = mainButton
+
+local buttonGlow = Instance.new("UIStroke")
+buttonGlow.Color = Color3.fromRGB(180, 100, 255)
+buttonGlow.Thickness = 3
+buttonGlow.Transparency = 0
+buttonGlow.Parent = mainButton
+
+local mainFrame = Instance.new("Frame")
+mainFrame.Name = "MainFrame"
+mainFrame.Size = UDim2.new(0, 450, 0, 300)
+mainFrame.Position = UDim2.new(0.5, -225, 0.5, -150)
+mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+mainFrame.BorderSizePixel = 0
+mainFrame.Visible = false
+mainFrame.Parent = screenGui
+
+local frameCorner = Instance.new("UICorner")
+frameCorner.CornerRadius = UDim.new(0, 15)
+frameCorner.Parent = mainFrame
+
+local frameStroke = Instance.new("UIStroke")
+frameStroke.Color = Color3.fromRGB(180, 100, 255)
+frameStroke.Thickness = 3
+frameStroke.Transparency = 0
+frameStroke.Parent = mainFrame
+
+local titleLabel = Instance.new("TextLabel")
+titleLabel.Name = "Title"
+titleLabel.Size = UDim2.new(0.7, 0, 0, 50)
+titleLabel.Position = UDim2.new(0, 0, 0, 0)
+titleLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+titleLabel.BorderSizePixel = 0
+titleLabel.Font = Enum.Font.GothamBold
+titleLabel.Text = "Lyra Admin FE"
+titleLabel.TextColor3 = Color3.fromRGB(255, 100, 200)
+titleLabel.TextSize = 20
+titleLabel.TextStrokeTransparency = 0
+titleLabel.TextXAlignment = Enum.TextXAlignment.Left
+titleLabel.Parent = mainFrame
+
+local titlePadding = Instance.new("UIPadding")
+titlePadding.PaddingLeft = UDim.new(0, 15)
+titlePadding.Parent = titleLabel
+
+local prefixLabel = Instance.new("TextLabel")
+prefixLabel.Name = "PrefixLabel"
+prefixLabel.Size = UDim2.new(0.3, -42, 0, 50)
+prefixLabel.Position = UDim2.new(0.7, 0, 0, 0)
+prefixLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+prefixLabel.BorderSizePixel = 0
+prefixLabel.Font = Enum.Font.GothamBold
+prefixLabel.Text = "Prefix: /"
+prefixLabel.TextColor3 = Color3.fromRGB(180, 100, 255)
+prefixLabel.TextSize = 16
+prefixLabel.TextStrokeTransparency = 0
+prefixLabel.TextXAlignment = Enum.TextXAlignment.Left
+prefixLabel.Parent = mainFrame
+
+local prefixPadding = Instance.new("UIPadding")
+prefixPadding.PaddingLeft = UDim.new(0, 10)
+prefixPadding.Parent = prefixLabel
+
+local prefixStroke = Instance.new("UIStroke")
+prefixStroke.Color = Color3.fromRGB(255, 100, 200)
+prefixStroke.Thickness = 1.5
+prefixStroke.Transparency = 0
+prefixStroke.Parent = prefixLabel
+
+local titleCorner = Instance.new("UICorner")
+titleCorner.CornerRadius = UDim.new(0, 15)
+titleCorner.Parent = titleLabel
+
+local titleGlow = Instance.new("UIStroke")
+titleGlow.Color = Color3.fromRGB(180, 100, 255)
+titleGlow.Thickness = 2
+titleGlow.Transparency = 0.3
+titleGlow.Parent = titleLabel
+
+local commandsLabel = Instance.new("TextLabel")
+commandsLabel.Name = "CommandsLabel"
+commandsLabel.Size = UDim2.new(0.9, 0, 0, 40)
+commandsLabel.Position = UDim2.new(0.05, 0, 0, 70)
+commandsLabel.BackgroundTransparency = 1
+commandsLabel.Font = Enum.Font.GothamBold
+commandsLabel.Text = "Comandos do Lyra"
+commandsLabel.TextColor3 = Color3.fromRGB(255, 100, 200)
+commandsLabel.TextSize = 22
+commandsLabel.TextStrokeTransparency = 0
+commandsLabel.Parent = mainFrame
+
+local commandsStroke = Instance.new("UIStroke")
+commandsStroke.Color = Color3.fromRGB(180, 100, 255)
+commandsStroke.Thickness = 1.5
+commandsStroke.Transparency = 0
+commandsStroke.Parent = commandsLabel
+
+local scrollFrame = Instance.new("ScrollingFrame")
+scrollFrame.Name = "CommandsScroll"
+scrollFrame.Size = UDim2.new(0.9, 0, 0, 170)
+scrollFrame.Position = UDim2.new(0.05, 0, 0, 120)
+scrollFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+scrollFrame.BorderSizePixel = 0
+scrollFrame.ScrollBarThickness = 6
+scrollFrame.ScrollBarImageColor3 = Color3.fromRGB(180, 100, 255)
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollFrame.Parent = mainFrame
+
+local scrollCorner = Instance.new("UICorner")
+scrollCorner.CornerRadius = UDim.new(0, 10)
+scrollCorner.Parent = scrollFrame
+
+local scrollStroke = Instance.new("UIStroke")
+scrollStroke.Color = Color3.fromRGB(255, 100, 200)
+scrollStroke.Thickness = 2
+scrollStroke.Transparency = 0.5
+scrollStroke.Parent = scrollFrame
+
+local listLayout = Instance.new("UIListLayout")
+listLayout.SortOrder = Enum.SortOrder.LayoutOrder
+listLayout.Padding = UDim.new(0, 10)
+listLayout.Parent = scrollFrame
+
+local scrollPadding = Instance.new("UIPadding")
+scrollPadding.PaddingTop = UDim.new(0, 10)
+scrollPadding.PaddingBottom = UDim.new(0, 10)
+scrollPadding.PaddingLeft = UDim.new(0, 10)
+scrollPadding.PaddingRight = UDim.new(0, 10)
+scrollPadding.Parent = scrollFrame
+
+local tpCommand = Instance.new("TextLabel")
+tpCommand.Name = "TPCommand"
+tpCommand.Size = UDim2.new(1, -20, 0, 35)
+tpCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+tpCommand.BorderSizePixel = 0
+tpCommand.Font = Enum.Font.GothamBold
+tpCommand.Text = "Tp Player"
+tpCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+tpCommand.TextSize = 16
+tpCommand.TextXAlignment = Enum.TextXAlignment.Left
+tpCommand.Parent = scrollFrame
+
+local tpPadding = Instance.new("UIPadding")
+tpPadding.PaddingLeft = UDim.new(0, 10)
+tpPadding.Parent = tpCommand
+
+local tpCorner = Instance.new("UICorner")
+tpCorner.CornerRadius = UDim.new(0, 8)
+tpCorner.Parent = tpCommand
+
+local tpStroke = Instance.new("UIStroke")
+tpStroke.Color = Color3.fromRGB(255, 100, 200)
+tpStroke.Thickness = 2
+tpStroke.Transparency = 0
+tpStroke.Parent = tpCommand
+
+local speedCommand = Instance.new("TextLabel")
+speedCommand.Name = "SpeedCommand"
+speedCommand.Size = UDim2.new(1, -20, 0, 35)
+speedCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+speedCommand.BorderSizePixel = 0
+speedCommand.Font = Enum.Font.GothamBold
+speedCommand.Text = "Speed"
+speedCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+speedCommand.TextSize = 16
+speedCommand.TextXAlignment = Enum.TextXAlignment.Left
+speedCommand.Parent = scrollFrame
+
+local speedPadding = Instance.new("UIPadding")
+speedPadding.PaddingLeft = UDim.new(0, 10)
+speedPadding.Parent = speedCommand
+
+local speedCorner = Instance.new("UICorner")
+speedCorner.CornerRadius = UDim.new(0, 8)
+speedCorner.Parent = speedCommand
+
+local speedStroke = Instance.new("UIStroke")
+speedStroke.Color = Color3.fromRGB(180, 100, 255)
+speedStroke.Thickness = 2
+speedStroke.Transparency = 0
+speedStroke.Parent = speedCommand
+
+local jumpCommand = Instance.new("TextLabel")
+jumpCommand.Name = "JumpBoostCommand"
+jumpCommand.Size = UDim2.new(1, -20, 0, 35)
+jumpCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+jumpCommand.BorderSizePixel = 0
+jumpCommand.Font = Enum.Font.GothamBold
+jumpCommand.Text = "JumpBoost [50 deixa o pulo normal]"
+jumpCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+jumpCommand.TextSize = 16
+jumpCommand.TextXAlignment = Enum.TextXAlignment.Left
+jumpCommand.Parent = scrollFrame
+
+local jumpPadding = Instance.new("UIPadding")
+jumpPadding.PaddingLeft = UDim.new(0, 10)
+jumpPadding.Parent = jumpCommand
+
+local jumpCorner = Instance.new("UICorner")
+jumpCorner.CornerRadius = UDim.new(0, 8)
+jumpCorner.Parent = jumpCommand
+
+local jumpStroke = Instance.new("UIStroke")
+jumpStroke.Color = Color3.fromRGB(255, 100, 200)
+jumpStroke.Thickness = 2
+jumpStroke.Transparency = 0
+jumpStroke.Parent = jumpCommand
+
+local loopGotoCommand = Instance.new("TextLabel")
+loopGotoCommand.Name = "LoopGotoCommand"
+loopGotoCommand.Size = UDim2.new(1, -20, 0, 35)
+loopGotoCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+loopGotoCommand.BorderSizePixel = 0
+loopGotoCommand.Font = Enum.Font.GothamBold
+loopGotoCommand.Text = "LoopGoto"
+loopGotoCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+loopGotoCommand.TextSize = 16
+loopGotoCommand.TextXAlignment = Enum.TextXAlignment.Left
+loopGotoCommand.Parent = scrollFrame
+
+local loopGotoPadding = Instance.new("UIPadding")
+loopGotoPadding.PaddingLeft = UDim.new(0, 10)
+loopGotoPadding.Parent = loopGotoCommand
+
+local loopGotoCorner = Instance.new("UICorner")
+loopGotoCorner.CornerRadius = UDim.new(0, 8)
+loopGotoCorner.Parent = loopGotoCommand
+
+local loopGotoStroke = Instance.new("UIStroke")
+loopGotoStroke.Color = Color3.fromRGB(180, 100, 255)
+loopGotoStroke.Thickness = 2
+loopGotoStroke.Transparency = 0
+loopGotoStroke.Parent = loopGotoCommand
+
+local unLoopGotoCommand = Instance.new("TextLabel")
+unLoopGotoCommand.Name = "UnLoopGotoCommand"
+unLoopGotoCommand.Size = UDim2.new(1, -20, 0, 35)
+unLoopGotoCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+unLoopGotoCommand.BorderSizePixel = 0
+unLoopGotoCommand.Font = Enum.Font.GothamBold
+unLoopGotoCommand.Text = "UnLoopGoto"
+unLoopGotoCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+unLoopGotoCommand.TextSize = 16
+unLoopGotoCommand.TextXAlignment = Enum.TextXAlignment.Left
+unLoopGotoCommand.Parent = scrollFrame
+
+local unLoopGotoPadding = Instance.new("UIPadding")
+unLoopGotoPadding.PaddingLeft = UDim.new(0, 10)
+unLoopGotoPadding.Parent = unLoopGotoCommand
+
+local unLoopGotoCorner = Instance.new("UICorner")
+unLoopGotoCorner.CornerRadius = UDim.new(0, 8)
+unLoopGotoCorner.Parent = unLoopGotoCommand
+
+local unLoopGotoStroke = Instance.new("UIStroke")
+unLoopGotoStroke.Color = Color3.fromRGB(255, 100, 200)
+unLoopGotoStroke.Thickness = 2
+unLoopGotoStroke.Transparency = 0
+unLoopGotoStroke.Parent = unLoopGotoCommand
+
+local gojoCommand = Instance.new("TextLabel")
+gojoCommand.Name = "GojoCommand"
+gojoCommand.Size = UDim2.new(1, -20, 0, 35)
+gojoCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+gojoCommand.BorderSizePixel = 0
+gojoCommand.Font = Enum.Font.GothamBold
+gojoCommand.Text = "Gojo Script"
+gojoCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+gojoCommand.TextSize = 16
+gojoCommand.TextXAlignment = Enum.TextXAlignment.Left
+gojoCommand.Parent = scrollFrame
+
+local gojoPadding = Instance.new("UIPadding")
+gojoPadding.PaddingLeft = UDim.new(0, 10)
+gojoPadding.Parent = gojoCommand
+
+local gojoCorner = Instance.new("UICorner")
+gojoCorner.CornerRadius = UDim.new(0, 8)
+gojoCorner.Parent = gojoCommand
+
+local gojoStroke = Instance.new("UIStroke")
+gojoStroke.Color = Color3.fromRGB(0, 170, 255)
+gojoStroke.Thickness = 2
+gojoStroke.Transparency = 0
+gojoStroke.Parent = gojoCommand
+
+local gonerCommand = Instance.new("TextLabel")
+gonerCommand.Name = "GonerCommand"
+gonerCommand.Size = UDim2.new(1, -20, 0, 35)
+gonerCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+gonerCommand.BorderSizePixel = 0
+gonerCommand.Font = Enum.Font.GothamBold
+gonerCommand.Text = "Goner Script"
+gonerCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+gonerCommand.TextSize = 16
+gonerCommand.TextXAlignment = Enum.TextXAlignment.Left
+gonerCommand.Parent = scrollFrame
+
+local gonerPadding = Instance.new("UIPadding")
+gonerPadding.PaddingLeft = UDim.new(0, 10)
+gonerPadding.Parent = gonerCommand
+
+local gonerCorner = Instance.new("UICorner")
+gonerCorner.CornerRadius = UDim.new(0, 8)
+gonerCorner.Parent = gonerCommand
+
+local gonerStroke = Instance.new("UIStroke")
+gonerStroke.Color = Color3.fromRGB(0, 255, 150)
+gonerStroke.Thickness = 2
+gonerStroke.Transparency = 0
+gonerStroke.Parent = gonerCommand
+
+local coolkidCommand = Instance.new("TextLabel")
+coolkidCommand.Name = "CoolkidCommand"
+coolkidCommand.Size = UDim2.new(1, -20, 0, 35)
+coolkidCommand.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+coolkidCommand.BorderSizePixel = 0
+coolkidCommand.Font = Enum.Font.GothamBold
+coolkidCommand.Text = "Coolkid Script"
+coolkidCommand.TextColor3 = Color3.fromRGB(255, 255, 255)
+coolkidCommand.TextSize = 16
+coolkidCommand.TextXAlignment = Enum.TextXAlignment.Left
+coolkidCommand.Parent = scrollFrame
+
+local coolkidPadding = Instance.new("UIPadding")
+coolkidPadding.PaddingLeft = UDim.new(0, 10)
+coolkidPadding.Parent = coolkidCommand
+
+local coolkidCorner = Instance.new("UICorner")
+coolkidCorner.CornerRadius = UDim.new(0, 8)
+coolkidCorner.Parent = coolkidCommand
+
+local coolkidStroke = Instance.new("UIStroke")
+coolkidStroke.Color = Color3.fromRGB(255, 150, 0)
+coolkidStroke.Thickness = 2
+coolkidStroke.Transparency = 0
+coolkidStroke.Parent = coolkidCommand
+
+local x1x1x1Command = Instance.new("TextLabel")
+x1x1x1Command.Name = "1x1x1Command"
+x1x1x1Command.Size = UDim2.new(1, -20, 0, 35)
+x1x1x1Command.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+x1x1x1Command.BorderSizePixel = 0
+x1x1x1Command.Font = Enum.Font.GothamBold
+x1x1x1Command.Text = "1x1x1 Script"
+x1x1x1Command.TextColor3 = Color3.fromRGB(255, 255, 255)
+x1x1x1Command.TextSize = 16
+x1x1x1Command.TextXAlignment = Enum.TextXAlignment.Left
+x1x1x1Command.Parent = scrollFrame
+
+local x1x1x1Padding = Instance.new("UIPadding")
+x1x1x1Padding.PaddingLeft = UDim.new(0, 10)
+x1x1x1Padding.Parent = x1x1x1Command
+
+local x1x1x1Corner = Instance.new("UICorner")
+x1x1x1Corner.CornerRadius = UDim.new(0, 8)
+x1x1x1Corner.Parent = x1x1x1Command
+
+local x1x1x1Stroke = Instance.new("UIStroke")
+x1x1x1Stroke.Color = Color3.fromRGB(255, 255, 0)
+x1x1x1Stroke.Thickness = 2
+x1x1x1Stroke.Transparency = 0
+x1x1x1Stroke.Parent = x1x1x1Command
+
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 415)
+
+local isOpen = false
+
+local function toggleInterface()
+    isOpen = not isOpen
+    
+    if isOpen then
+        mainFrame.Visible = true
+        mainFrame.Size = UDim2.new(0, 0, 0, 0)
+        mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+        
+        local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+        local tween = TweenService:Create(mainFrame, tweenInfo, {
+            Size = UDim2.new(0, 450, 0, 300),
+            Position = UDim2.new(0.5, -225, 0.5, -150)
+        })
+        tween:Play()
+    else
+        local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+        local tween = TweenService:Create(mainFrame, tweenInfo, {
+            Size = UDim2.new(0, 0, 0, 0),
+            Position = UDim2.new(0.5, 0, 0.5, 0)
+        })
+        tween:Play()
+        tween.Completed:Connect(function()
+            mainFrame.Visible = false
+        end)
+    end
+end
+
+mainButton.MouseButton1Click:Connect(toggleInterface)
+
+local dragging = false
+local dragInput
+local dragStart
+local startPos
+
+local function update(input)
+    local delta = input.Position - dragStart
+    mainButton.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+end
+
+mainButton.InputBegan:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
+        dragging = true
+        dragStart = input.Position
+        startPos = mainButton.Position
+        
+        input.Changed:Connect(function()
+            if input.UserInputState == Enum.UserInputState.End then
+                dragging = false
+            end
+        end)
+    end
+end)
+
+mainButton.InputChanged:Connect(function(input)
+    if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+        dragInput = input
+    end
+end)
+
+UserInputService.InputChanged:Connect(function(input)
+    if input == dragInput and dragging then
+        update(input)
+    end
+end)
+
+mainButton.MouseEnter:Connect(function()
+    local tweenInfo = TweenInfo.new(0.2)
+    local tween = TweenService:Create(mainButton, tweenInfo, {
+        Size = UDim2.new(0, 65, 0, 65),
+        BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+    })
+    tween:Play()
+end)
+
+mainButton.MouseLeave:Connect(function()
+    local tweenInfo = TweenInfo.new(0.2)
+    local tween = TweenService:Create(mainButton, tweenInfo, {
+        Size = UDim2.new(0, 60, 0, 60),
+        BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+    })
+    tween:Play()
+end)
+
+print("Lyra Admin FE carregado com sucesso!")
+
+local function systemMessage(text)
+    pcall(function()
+        game:GetService("StarterGui"):SetCore("ChatMakeSystemMessage", {
+            Text = tostring(text);
+            Color = Color3.fromRGB(255, 100, 200);
+            Font = Enum.Font.SourceSans;
+            FontSize = Enum.FontSize.Size18;
+        })
+    end)
+end
+
+local function findPlayersByNameOrDisplay(query)
+    query = tostring(query):lower()
+    local exact = {}
+    local partial = {}
+    for _, p in ipairs(Players:GetPlayers()) do
+        local name = (p.Name or ""):lower()
+        local dname = (p.DisplayName or ""):lower()
+        if name == query or dname == query then
+            table.insert(exact, p)
+        elseif name:find(query, 1, true) or (dname ~= "" and dname:find(query, 1, true)) then
+            table.insert(partial, p)
+        end
+    end
+    if #exact > 0 then
+        return exact
+    end
+    return partial
+end
+
+local function getRootPart(character)
+    if not character then return nil end
+    return character:FindFirstChild("HumanoidRootPart")
+        or character:FindFirstChild("Torso")
+        or character:FindFirstChild("UpperTorso")
+end
+
+local function teleportTo(targetPlayer)
+    if not targetPlayer then
+        return false, "Alvo inválido"
+    end
+
+    local myChar = player.Character or player.CharacterAdded:Wait()
+    local myRoot = getRootPart(myChar)
+    if not myRoot then
+        return false, "Seu personagem não tem HumanoidRootPart"
+    end
+
+    local targetChar = targetPlayer.Character
+    if not targetChar then
+        return false, "Jogador alvo não tem personagem carregado"
+    end
+
+    local targetRoot = getRootPart(targetChar)
+    if not targetRoot then
+        return false, "Personagem do alvo não tem HumanoidRootPart"
+    end
+
+    local ok, err = pcall(function()
+        myRoot.CFrame = targetRoot.CFrame + Vector3.new(0, 3, 0)
+    end)
+    if not ok then
+        return false, "Erro ao definir CFrame: " .. tostring(err)
+    end
+    return true
+end
+
+local function handleChat(msg)
+    if not msg or msg == "" then return end
+    msg = msg:match("^%s*(.-)%s*$")
+    local prefix, cmd, rest = msg:match("^(%p)(%w+)%s*(.*)$")
+    if not prefix then return end
+    if prefix ~= "/" then return end
+    if cmd:lower() ~= "tp" then return end
+
+    local targetQuery = (rest or ""):match("^%s*(.-)%s*$")
+    if not targetQuery or targetQuery == "" then
+        systemMessage("Uso: /tp [nick]")
+        return
+    end
+
+    local matches = findPlayersByNameOrDisplay(targetQuery)
+    if #matches == 0 then
+        systemMessage("Jogador não encontrado: " .. targetQuery)
+        return
+    end
+
+    if #matches > 1 then
+        local names = {}
+        for i, p in ipairs(matches) do
+            table.insert(names, p.Name)
+        end
+        systemMessage("Vários jogadores encontrados, usando o primeiro: " .. names[1])
+    end
+
+    local ok, err = teleportTo(matches[1])
+    if not ok then
+        systemMessage("Falha ao teleportar: " .. tostring(err))
+    else
+        systemMessage("Teleportado para " .. matches[1].Name .. " (" .. (matches[1].DisplayName or "") .. ")")
+    end
+end
+
+player.Chatted:Connect(handleChat)
+
+local function handleSpeedCommand(args)
+    local rawValue = args[2]
+    local value = tonumber(rawValue)
+    if not value then
+        systemMessage("Uso: /speed <numero> — exemplo: /speed 200")
+        return
+    end
+    if value <= 0 then
+        systemMessage("O valor da velocidade precisa ser maior que 0.")
+        return
+    end
+    
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if not humanoid then
+        systemMessage("Humanoid não encontrado no personagem.")
+        return
+    end
+    humanoid.WalkSpeed = value
+    systemMessage("Velocidade definida para " .. tostring(value))
+end
+
+local function handleJumpBoostCommand(args)
+    local rawValue = args[2]
+    local value = tonumber(rawValue)
+    if not value then
+        systemMessage("Uso: /jumpboost <numero> — exemplo: /jumpboost 200 (50 é padrão)")
+        return
+    end
+    if value <= 0 then
+        systemMessage("O valor do pulo precisa ser maior que 0.")
+        return
+    end
+    
+    local character = player.Character or player.CharacterAdded:Wait()
+    local humanoid = character:FindFirstChildOfClass("Humanoid")
+    if not humanoid then
+        systemMessage("Humanoid não encontrado no personagem.")
+        return
+    end
+    
+    humanoid.JumpPower = value
+    systemMessage("JumpPower definido para " .. tostring(value))
+end
+
+local RunService = game:GetService("RunService")
+local activeTarget = nil
+local heartbeatConn = nil
+local distanceBehind = 2
+
+local function findPlayerByName(input)
+    if not input then return nil end
+    local lowerInput = input:lower()
+    for _, pl in ipairs(Players:GetPlayers()) do
+        if pl.Name:lower() == lowerInput then return pl end
+        if pl.DisplayName and pl.DisplayName:lower() == lowerInput then return pl end
+    end
+    for _, pl in ipairs(Players:GetPlayers()) do
+        if pl.Name:lower():find(lowerInput, 1, true) then return pl end
+        if pl.DisplayName and pl.DisplayName:lower():find(lowerInput, 1, true) then return pl end
+    end
+    return nil
+end
+
+local function stopActiveLoop()
+    if heartbeatConn then
+        heartbeatConn:Disconnect()
+        heartbeatConn = nil
+    end
+    if activeTarget then
+        systemMessage("Desgrudado de " .. (activeTarget.DisplayName ~= "" and activeTarget.DisplayName or activeTarget.Name))
+    else
+        systemMessage("Nenhum loop ativo.")
+    end
+    activeTarget = nil
+end
+
+local function startLoopGoto(targetPlayer, dist)
+    if not targetPlayer then return end
+    if targetPlayer == player then
+        systemMessage("Não é possível grudar em você mesmo.")
+        return
+    end
+
+    if activeTarget then
+        stopActiveLoop()
+    end
+
+    activeTarget = targetPlayer
+    distanceBehind = (type(dist) == "number" and dist > 0) and dist or 2
+    systemMessage("Iniciando loopgoto ATRÁS de " .. (targetPlayer.DisplayName ~= "" and targetPlayer.DisplayName or targetPlayer.Name) .. " (dist: " .. tostring(distanceBehind) .. ")")
+
+    local function getHRP(pl)
+        local ch = pl.Character
+        if not ch then return nil end
+        return ch:FindFirstChild("HumanoidRootPart") or ch:FindFirstChild("Torso")
+    end
+
+    heartbeatConn = RunService.Heartbeat:Connect(function()
+        local targetHRP = getHRP(targetPlayer)
+        local myCh = player.Character
+        if not targetHRP or not myCh then
+            return
+        end
+
+        local myHRP = myCh:FindFirstChild("HumanoidRootPart")
+        local myHum = myCh:FindFirstChildOfClass("Humanoid")
+        if not myHRP or not myHum then
+            return
+        end
+
+        local look = targetHRP.CFrame.LookVector
+        local forward = Vector3.new(look.X, 0, look.Z)
+        if forward.Magnitude == 0 then
+            forward = Vector3.new(0, 0, -1)
+        else
+            forward = forward.Unit
+        end
+
+        local behindPos = targetHRP.Position - (forward * distanceBehind)
+        behindPos = Vector3.new(behindPos.X, targetHRP.Position.Y, behindPos.Z)
+
+        local desiredCFrame = CFrame.new(behindPos, Vector3.new(targetHRP.Position.X, behindPos.Y, targetHRP.Position.Z))
+
+        pcall(function()
+            myHRP.AssemblyLinearVelocity = Vector3.new(0, 0, 0)
+            myHRP.AssemblyAngularVelocity = Vector3.new(0, 0, 0)
+        end)
+        myHRP.CFrame = desiredCFrame
+    end)
+end
+
+local function handleGojoCommand()
+    systemMessage("Executando /gojo...")
+
+    local ok, err = pcall(function()
+        local loader = loadstring or load
+        if not loader then
+            error("loadstring/load não disponível neste ambiente.")
+        end
+
+        local url = "https://raw.githubusercontent.com/BRENOPOOF/Main.txt/refs/heads/main/Main.txt"
+        local success, code = pcall(function() return game:HttpGet(url) end)
+        if not success or type(code) ~= "string" then
+            error("Falha ao obter o código remoto.")
+        end
+
+        local func = loader(code)
+        if type(func) == "function" then
+            func()
+        else
+            error("O código remoto não compilou como função.")
+        end
+    end)
+
+    if not ok then
+        systemMessage("Erro ao executar /gojo: " .. tostring(err))
+    else
+        systemMessage("/gojo executado com sucesso.")
+    end
+end
+
+local function handleGonerCommand()
+    systemMessage("Tentando executar /goner...")
+
+    local ok, err = pcall(function()
+        local REMOTE_URL = "https://raw.githubusercontent.com/puppetn89-dotcom/goner/refs/heads/main/Main.txt"
+        
+        local getterOk, code = pcall(function()
+            return game:HttpGet(REMOTE_URL)
+        end)
+        if not getterOk or type(code) ~= "string" then
+            error("Falha ao obter o código remoto. Verifique HttpEnabled e a URL.")
+        end
+
+        local loader = loadstring or load
+        if not loader then
+            error("loadstring/load não disponível neste ambiente.")
+        end
+
+        local compiled, compileErr = pcall(function() return loader(code) end)
+        if not compiled or type(compileErr) ~= "function" then
+            error("Erro ao compilar o código remoto: " .. tostring(compileErr))
+        end
+
+        local runOk, runErr = pcall(function() compileErr() end)
+        if not runOk then
+            error("Erro ao executar o código remoto: " .. tostring(runErr))
+        end
+    end)
+
+    if not ok then
+        systemMessage("Erro em /goner: " .. tostring(err))
+    else
+        systemMessage("/goner executado com sucesso.")
+    end
+end
+
+local function handleCoolkidCommand()
+    systemMessage("Tentando executar /coolkid...")
+
+    local ok, err = pcall(function()
+        local REMOTE_URL = "https://raw.githubusercontent.com/puppetn89-dotcom/c00lkid/refs/heads/main/Main.txt"
+        
+        local getterOk, code = pcall(function()
+            return game:HttpGet(REMOTE_URL)
+        end)
+        if not getterOk or type(code) ~= "string" then
+            error("Falha ao obter o código remoto. Verifique HttpEnabled e a URL.")
+        end
+
+        local loader = loadstring or load
+        if not loader then
+            error("loadstring/load não disponível neste ambiente.")
+        end
+
+        local compiledFunc, compileErr = pcall(function() return loader(code) end)
+        if not compiledFunc or type(compileErr) ~= "function" then
+            error("Erro ao compilar o código remoto: " .. tostring(compileErr))
+        end
+
+        local runOk, runErr = pcall(function() compileErr() end)
+        if not runOk then
+            error("Erro ao executar o código remoto: " .. tostring(runErr))
+        end
+    end)
+
+    if not ok then
+        systemMessage("Erro em /coolkid: " .. tostring(err))
+    else
+        systemMessage("/coolkid executado com sucesso.")
+    end
+end
+
+local function handle1x1x1Command()
+    systemMessage("Executando /1x1x1...")
+
+    local ok, err = pcall(function()
+        local URL = "https://raw.githubusercontent.com/puppetn89-dotcom/1x1x1/refs/heads/main/Main.txt"
+        
+        local ok, content = pcall(function() return game:HttpGet(URL) end)
+        if not ok then
+            error("Falha ao baixar o script: "..tostring(content))
+        end
+
+        local ok2, err = pcall(function() loadstring(content)() end)
+        if not ok2 then
+            error("Erro ao executar o script: "..tostring(err))
+        end
+    end)
+
+    if not ok then
+        systemMessage("Erro em /1x1x1: " .. tostring(err))
+    else
+        systemMessage("/1x1x1 executado com sucesso.")
+    end
+end
+
+player.Chatted:Connect(function(msg)
+    if type(msg) ~= "string" then return end
+    if msg:sub(1, 1) ~= "/" then return end
+    
+    local args = {}
+    for part in msg:gmatch("%S+") do
+        table.insert(args, part)
+    end
+    
+    local cmd = args[1]:sub(2):lower()
+    
+    if cmd == "speed" then
+        handleSpeedCommand(args)
+    elseif cmd == "jumpboost" then
+        handleJumpBoostCommand(args)
+    elseif cmd == "loopgoto" then
+        if not args[2] then
+            systemMessage("Uso: /loopgoto <nick> [distancia]")
+            return
+        end
+
+        local targetName = args[2]
+        local target = findPlayerByName(targetName)
+        if not target then
+            systemMessage("Jogador '" .. targetName .. "' não encontrado.")
+            return
+        end
+
+        local dist = tonumber(args[3])
+        startLoopGoto(target, dist)
+    elseif cmd == "unloopgoto" then
+        if not args[2] then
+            stopActiveLoop()
+            return
+        end
+        local targetName = args[2]
+        local target = findPlayerByName(targetName)
+        if not target then
+            systemMessage("Jogador '" .. targetName .. "' não encontrado.")
+            return
+        end
+        if activeTarget and target == activeTarget then
+            stopActiveLoop()
+        else
+            systemMessage("Você não está grudado em " .. (target.DisplayName ~= "" and target.DisplayName or target.Name))
+        end
+    elseif cmd == "gojo" then
+        handleGojoCommand()
+    elseif cmd == "goner" then
+        handleGonerCommand()
+    elseif cmd == "coolkid" then
+        handleCoolkidCommand()
+    elseif cmd == "1x1x1" then
+        handle1x1x1Command()
+    end
+end)
+
+systemMessage("Lyra Admin FE ativo! Use /tp [nick], /speed, /jumpboost, /loopgoto, /unloopgoto, /gojo, /goner, /coolkid, /1x1x1")
