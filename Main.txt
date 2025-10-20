@@ -1,3 +1,6 @@
+-- Lyra Admin FE Interface
+-- Criado para Roblox
+
 local Players = game:GetService("Players")
 local UserInputService = game:GetService("UserInputService")
 local TweenService = game:GetService("TweenService")
@@ -5,54 +8,62 @@ local TweenService = game:GetService("TweenService")
 local player = Players.LocalPlayer
 local playerGui = player:WaitForChild("PlayerGui")
 
+-- Criar ScreenGui principal
 local screenGui = Instance.new("ScreenGui")
 screenGui.Name = "LyraAdminGui"
 screenGui.ResetOnSpawn = false
 screenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 screenGui.Parent = playerGui
 
+-- Botão móvel "LY"
 local mainButton = Instance.new("TextButton")
 mainButton.Name = "MainButton"
 mainButton.Size = UDim2.new(0, 60, 0, 60)
 mainButton.Position = UDim2.new(0.5, -30, 0, 20)
-mainButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0)
+mainButton.BackgroundColor3 = Color3.fromRGB(0, 0, 0) -- Preto
 mainButton.BorderSizePixel = 0
 mainButton.Font = Enum.Font.GothamBold
 mainButton.Text = "LY"
-mainButton.TextColor3 = Color3.fromRGB(255, 100, 200)
+mainButton.TextColor3 = Color3.fromRGB(255, 100, 200) -- Rosa neon
 mainButton.TextSize = 24
 mainButton.TextStrokeTransparency = 0
 mainButton.Parent = screenGui
 
+-- Arredondar cantos do botão (circular)
 local buttonCorner = Instance.new("UICorner")
 buttonCorner.CornerRadius = UDim.new(1, 0)
 buttonCorner.Parent = mainButton
 
+-- Efeito de brilho no botão
 local buttonGlow = Instance.new("UIStroke")
-buttonGlow.Color = Color3.fromRGB(180, 100, 255)
+buttonGlow.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
 buttonGlow.Thickness = 3
 buttonGlow.Transparency = 0
 buttonGlow.Parent = mainButton
 
+-- Frame principal da interface de comandos
 local mainFrame = Instance.new("Frame")
 mainFrame.Name = "MainFrame"
 mainFrame.Size = UDim2.new(0, 450, 0, 300)
 mainFrame.Position = UDim2.new(0.5, -225, 0.5, -150)
-mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+mainFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15) -- Preto
 mainFrame.BorderSizePixel = 0
 mainFrame.Visible = false
 mainFrame.Parent = screenGui
 
+-- Arredondar cantos da interface
 local frameCorner = Instance.new("UICorner")
 frameCorner.CornerRadius = UDim.new(0, 15)
 frameCorner.Parent = mainFrame
 
+-- Borda neon da interface
 local frameStroke = Instance.new("UIStroke")
-frameStroke.Color = Color3.fromRGB(180, 100, 255)
+frameStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
 frameStroke.Thickness = 3
 frameStroke.Transparency = 0
 frameStroke.Parent = mainFrame
 
+-- Título da interface
 local titleLabel = Instance.new("TextLabel")
 titleLabel.Name = "Title"
 titleLabel.Size = UDim2.new(0.7, 0, 0, 50)
@@ -61,16 +72,18 @@ titleLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 titleLabel.BorderSizePixel = 0
 titleLabel.Font = Enum.Font.GothamBold
 titleLabel.Text = "Lyra Admin FE"
-titleLabel.TextColor3 = Color3.fromRGB(255, 100, 200)
+titleLabel.TextColor3 = Color3.fromRGB(255, 100, 200) -- Rosa neon
 titleLabel.TextSize = 20
 titleLabel.TextStrokeTransparency = 0
 titleLabel.TextXAlignment = Enum.TextXAlignment.Left
 titleLabel.Parent = mainFrame
 
+-- Padding para o título
 local titlePadding = Instance.new("UIPadding")
 titlePadding.PaddingLeft = UDim.new(0, 15)
 titlePadding.Parent = titleLabel
 
+-- Texto da prefix ao lado do título
 local prefixLabel = Instance.new("TextLabel")
 prefixLabel.Name = "PrefixLabel"
 prefixLabel.Size = UDim2.new(0.3, -42, 0, 50)
@@ -79,32 +92,62 @@ prefixLabel.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
 prefixLabel.BorderSizePixel = 0
 prefixLabel.Font = Enum.Font.GothamBold
 prefixLabel.Text = "Prefix: /"
-prefixLabel.TextColor3 = Color3.fromRGB(180, 100, 255)
+prefixLabel.TextColor3 = Color3.fromRGB(180, 100, 255) -- Roxo neon
 prefixLabel.TextSize = 16
 prefixLabel.TextStrokeTransparency = 0
 prefixLabel.TextXAlignment = Enum.TextXAlignment.Left
 prefixLabel.Parent = mainFrame
 
+-- Padding para a prefix
 local prefixPadding = Instance.new("UIPadding")
 prefixPadding.PaddingLeft = UDim.new(0, 10)
 prefixPadding.Parent = prefixLabel
 
+-- Borda rosa na prefix
 local prefixStroke = Instance.new("UIStroke")
-prefixStroke.Color = Color3.fromRGB(255, 100, 200)
+prefixStroke.Color = Color3.fromRGB(255, 100, 200) -- Rosa neon
 prefixStroke.Thickness = 1.5
 prefixStroke.Transparency = 0
 prefixStroke.Parent = prefixLabel
 
+-- Arredondar cantos do título
 local titleCorner = Instance.new("UICorner")
 titleCorner.CornerRadius = UDim.new(0, 15)
 titleCorner.Parent = titleLabel
 
+-- Brilho do título
 local titleGlow = Instance.new("UIStroke")
-titleGlow.Color = Color3.fromRGB(180, 100, 255)
+titleGlow.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
 titleGlow.Thickness = 2
 titleGlow.Transparency = 0.3
 titleGlow.Parent = titleLabel
 
+-- Botão para expandir lista de TP
+local expandButton = Instance.new("TextButton")
+expandButton.Name = "ExpandButton"
+expandButton.Size = UDim2.new(0, 40, 0, 40)
+expandButton.Position = UDim2.new(1, -45, 0, 5)
+expandButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+expandButton.BorderSizePixel = 0
+expandButton.Font = Enum.Font.GothamBold
+expandButton.Text = ">"
+expandButton.TextColor3 = Color3.fromRGB(255, 100, 200) -- Rosa neon
+expandButton.TextSize = 20
+expandButton.Parent = titleLabel
+
+-- Arredondar cantos do botão expandir
+local expandCorner = Instance.new("UICorner")
+expandCorner.CornerRadius = UDim.new(0, 8)
+expandCorner.Parent = expandButton
+
+-- Borda neon no botão expandir
+local expandStroke = Instance.new("UIStroke")
+expandStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
+expandStroke.Thickness = 2
+expandStroke.Transparency = 0
+expandStroke.Parent = expandButton
+
+-- Texto de comandos
 local commandsLabel = Instance.new("TextLabel")
 commandsLabel.Name = "CommandsLabel"
 commandsLabel.Size = UDim2.new(0.9, 0, 0, 40)
@@ -112,17 +155,19 @@ commandsLabel.Position = UDim2.new(0.05, 0, 0, 70)
 commandsLabel.BackgroundTransparency = 1
 commandsLabel.Font = Enum.Font.GothamBold
 commandsLabel.Text = "Comandos do Lyra"
-commandsLabel.TextColor3 = Color3.fromRGB(255, 100, 200)
+commandsLabel.TextColor3 = Color3.fromRGB(255, 100, 200) -- Rosa neon
 commandsLabel.TextSize = 22
 commandsLabel.TextStrokeTransparency = 0
 commandsLabel.Parent = mainFrame
 
+-- Borda roxa no texto de comandos
 local commandsStroke = Instance.new("UIStroke")
-commandsStroke.Color = Color3.fromRGB(180, 100, 255)
+commandsStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
 commandsStroke.Thickness = 1.5
 commandsStroke.Transparency = 0
 commandsStroke.Parent = commandsLabel
 
+-- Frame com scroll para comandos
 local scrollFrame = Instance.new("ScrollingFrame")
 scrollFrame.Name = "CommandsScroll"
 scrollFrame.Size = UDim2.new(0.9, 0, 0, 170)
@@ -130,25 +175,29 @@ scrollFrame.Position = UDim2.new(0.05, 0, 0, 120)
 scrollFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
 scrollFrame.BorderSizePixel = 0
 scrollFrame.ScrollBarThickness = 6
-scrollFrame.ScrollBarImageColor3 = Color3.fromRGB(180, 100, 255)
-scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+scrollFrame.ScrollBarImageColor3 = Color3.fromRGB(180, 100, 255) -- Roxo neon
+scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0) -- Será ajustado dinamicamente
 scrollFrame.Parent = mainFrame
 
+-- Arredondar cantos do scroll
 local scrollCorner = Instance.new("UICorner")
 scrollCorner.CornerRadius = UDim.new(0, 10)
 scrollCorner.Parent = scrollFrame
 
+-- Borda neon no scroll
 local scrollStroke = Instance.new("UIStroke")
-scrollStroke.Color = Color3.fromRGB(255, 100, 200)
+scrollStroke.Color = Color3.fromRGB(255, 100, 200) -- Rosa neon
 scrollStroke.Thickness = 2
 scrollStroke.Transparency = 0.5
 scrollStroke.Parent = scrollFrame
 
+-- Layout para organizar os comandos
 local listLayout = Instance.new("UIListLayout")
 listLayout.SortOrder = Enum.SortOrder.LayoutOrder
 listLayout.Padding = UDim.new(0, 10)
 listLayout.Parent = scrollFrame
 
+-- Padding interno do scroll
 local scrollPadding = Instance.new("UIPadding")
 scrollPadding.PaddingTop = UDim.new(0, 10)
 scrollPadding.PaddingBottom = UDim.new(0, 10)
@@ -156,6 +205,7 @@ scrollPadding.PaddingLeft = UDim.new(0, 10)
 scrollPadding.PaddingRight = UDim.new(0, 10)
 scrollPadding.Parent = scrollFrame
 
+-- Comando TP
 local tpCommand = Instance.new("TextLabel")
 tpCommand.Name = "TPCommand"
 tpCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -168,20 +218,24 @@ tpCommand.TextSize = 16
 tpCommand.TextXAlignment = Enum.TextXAlignment.Left
 tpCommand.Parent = scrollFrame
 
+-- Padding do comando TP
 local tpPadding = Instance.new("UIPadding")
 tpPadding.PaddingLeft = UDim.new(0, 10)
 tpPadding.Parent = tpCommand
 
+-- Arredondar cantos do comando
 local tpCorner = Instance.new("UICorner")
 tpCorner.CornerRadius = UDim.new(0, 8)
 tpCorner.Parent = tpCommand
 
+-- Borda neon rosa no comando
 local tpStroke = Instance.new("UIStroke")
-tpStroke.Color = Color3.fromRGB(255, 100, 200)
+tpStroke.Color = Color3.fromRGB(255, 100, 200) -- Rosa neon
 tpStroke.Thickness = 2
 tpStroke.Transparency = 0
 tpStroke.Parent = tpCommand
 
+-- Comando Speed
 local speedCommand = Instance.new("TextLabel")
 speedCommand.Name = "SpeedCommand"
 speedCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -194,20 +248,24 @@ speedCommand.TextSize = 16
 speedCommand.TextXAlignment = Enum.TextXAlignment.Left
 speedCommand.Parent = scrollFrame
 
+-- Padding do comando Speed
 local speedPadding = Instance.new("UIPadding")
 speedPadding.PaddingLeft = UDim.new(0, 10)
 speedPadding.Parent = speedCommand
 
+-- Arredondar cantos do comando
 local speedCorner = Instance.new("UICorner")
 speedCorner.CornerRadius = UDim.new(0, 8)
 speedCorner.Parent = speedCommand
 
+-- Borda neon roxa no comando
 local speedStroke = Instance.new("UIStroke")
-speedStroke.Color = Color3.fromRGB(180, 100, 255)
+speedStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
 speedStroke.Thickness = 2
 speedStroke.Transparency = 0
 speedStroke.Parent = speedCommand
 
+-- Comando JumpBoost
 local jumpCommand = Instance.new("TextLabel")
 jumpCommand.Name = "JumpBoostCommand"
 jumpCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -220,20 +278,24 @@ jumpCommand.TextSize = 16
 jumpCommand.TextXAlignment = Enum.TextXAlignment.Left
 jumpCommand.Parent = scrollFrame
 
+-- Padding do comando JumpBoost
 local jumpPadding = Instance.new("UIPadding")
 jumpPadding.PaddingLeft = UDim.new(0, 10)
 jumpPadding.Parent = jumpCommand
 
+-- Arredondar cantos do comando
 local jumpCorner = Instance.new("UICorner")
 jumpCorner.CornerRadius = UDim.new(0, 8)
 jumpCorner.Parent = jumpCommand
 
+-- Borda neon rosa no comando
 local jumpStroke = Instance.new("UIStroke")
-jumpStroke.Color = Color3.fromRGB(255, 100, 200)
+jumpStroke.Color = Color3.fromRGB(255, 100, 200) -- Rosa neon
 jumpStroke.Thickness = 2
 jumpStroke.Transparency = 0
 jumpStroke.Parent = jumpCommand
 
+-- Comando LoopGoto
 local loopGotoCommand = Instance.new("TextLabel")
 loopGotoCommand.Name = "LoopGotoCommand"
 loopGotoCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -246,20 +308,24 @@ loopGotoCommand.TextSize = 16
 loopGotoCommand.TextXAlignment = Enum.TextXAlignment.Left
 loopGotoCommand.Parent = scrollFrame
 
+-- Padding do comando LoopGoto
 local loopGotoPadding = Instance.new("UIPadding")
 loopGotoPadding.PaddingLeft = UDim.new(0, 10)
 loopGotoPadding.Parent = loopGotoCommand
 
+-- Arredondar cantos do comando
 local loopGotoCorner = Instance.new("UICorner")
 loopGotoCorner.CornerRadius = UDim.new(0, 8)
 loopGotoCorner.Parent = loopGotoCommand
 
+-- Borda neon roxa no comando
 local loopGotoStroke = Instance.new("UIStroke")
-loopGotoStroke.Color = Color3.fromRGB(180, 100, 255)
+loopGotoStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
 loopGotoStroke.Thickness = 2
 loopGotoStroke.Transparency = 0
 loopGotoStroke.Parent = loopGotoCommand
 
+-- Comando UnLoopGoto
 local unLoopGotoCommand = Instance.new("TextLabel")
 unLoopGotoCommand.Name = "UnLoopGotoCommand"
 unLoopGotoCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -272,20 +338,24 @@ unLoopGotoCommand.TextSize = 16
 unLoopGotoCommand.TextXAlignment = Enum.TextXAlignment.Left
 unLoopGotoCommand.Parent = scrollFrame
 
+-- Padding do comando UnLoopGoto
 local unLoopGotoPadding = Instance.new("UIPadding")
 unLoopGotoPadding.PaddingLeft = UDim.new(0, 10)
 unLoopGotoPadding.Parent = unLoopGotoCommand
 
+-- Arredondar cantos do comando
 local unLoopGotoCorner = Instance.new("UICorner")
 unLoopGotoCorner.CornerRadius = UDim.new(0, 8)
 unLoopGotoCorner.Parent = unLoopGotoCommand
 
+-- Borda neon rosa no comando
 local unLoopGotoStroke = Instance.new("UIStroke")
-unLoopGotoStroke.Color = Color3.fromRGB(255, 100, 200)
+unLoopGotoStroke.Color = Color3.fromRGB(255, 100, 200) -- Rosa neon
 unLoopGotoStroke.Thickness = 2
 unLoopGotoStroke.Transparency = 0
 unLoopGotoStroke.Parent = unLoopGotoCommand
 
+-- Comando Gojo
 local gojoCommand = Instance.new("TextLabel")
 gojoCommand.Name = "GojoCommand"
 gojoCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -298,20 +368,24 @@ gojoCommand.TextSize = 16
 gojoCommand.TextXAlignment = Enum.TextXAlignment.Left
 gojoCommand.Parent = scrollFrame
 
+-- Padding do comando Gojo
 local gojoPadding = Instance.new("UIPadding")
 gojoPadding.PaddingLeft = UDim.new(0, 10)
 gojoPadding.Parent = gojoCommand
 
+-- Arredondar cantos do comando
 local gojoCorner = Instance.new("UICorner")
 gojoCorner.CornerRadius = UDim.new(0, 8)
 gojoCorner.Parent = gojoCommand
 
+-- Borda neon azul no comando Gojo
 local gojoStroke = Instance.new("UIStroke")
-gojoStroke.Color = Color3.fromRGB(0, 170, 255)
+gojoStroke.Color = Color3.fromRGB(0, 170, 255) -- Azul
 gojoStroke.Thickness = 2
 gojoStroke.Transparency = 0
 gojoStroke.Parent = gojoCommand
 
+-- Comando Goner
 local gonerCommand = Instance.new("TextLabel")
 gonerCommand.Name = "GonerCommand"
 gonerCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -324,20 +398,24 @@ gonerCommand.TextSize = 16
 gonerCommand.TextXAlignment = Enum.TextXAlignment.Left
 gonerCommand.Parent = scrollFrame
 
+-- Padding do comando Goner
 local gonerPadding = Instance.new("UIPadding")
 gonerPadding.PaddingLeft = UDim.new(0, 10)
 gonerPadding.Parent = gonerCommand
 
+-- Arredondar cantos do comando
 local gonerCorner = Instance.new("UICorner")
 gonerCorner.CornerRadius = UDim.new(0, 8)
 gonerCorner.Parent = gonerCommand
 
+-- Borda neon verde no comando Goner
 local gonerStroke = Instance.new("UIStroke")
-gonerStroke.Color = Color3.fromRGB(0, 255, 150)
+gonerStroke.Color = Color3.fromRGB(0, 255, 150) -- Verde neon
 gonerStroke.Thickness = 2
 gonerStroke.Transparency = 0
 gonerStroke.Parent = gonerCommand
 
+-- Comando Coolkid
 local coolkidCommand = Instance.new("TextLabel")
 coolkidCommand.Name = "CoolkidCommand"
 coolkidCommand.Size = UDim2.new(1, -20, 0, 35)
@@ -350,20 +428,24 @@ coolkidCommand.TextSize = 16
 coolkidCommand.TextXAlignment = Enum.TextXAlignment.Left
 coolkidCommand.Parent = scrollFrame
 
+-- Padding do comando Coolkid
 local coolkidPadding = Instance.new("UIPadding")
 coolkidPadding.PaddingLeft = UDim.new(0, 10)
 coolkidPadding.Parent = coolkidCommand
 
+-- Arredondar cantos do comando
 local coolkidCorner = Instance.new("UICorner")
 coolkidCorner.CornerRadius = UDim.new(0, 8)
 coolkidCorner.Parent = coolkidCommand
 
+-- Borda neon laranja no comando Coolkid
 local coolkidStroke = Instance.new("UIStroke")
-coolkidStroke.Color = Color3.fromRGB(255, 150, 0)
+coolkidStroke.Color = Color3.fromRGB(255, 150, 0) -- Laranja
 coolkidStroke.Thickness = 2
 coolkidStroke.Transparency = 0
 coolkidStroke.Parent = coolkidCommand
 
+-- Comando 1x1x1
 local x1x1x1Command = Instance.new("TextLabel")
 x1x1x1Command.Name = "1x1x1Command"
 x1x1x1Command.Size = UDim2.new(1, -20, 0, 35)
@@ -376,29 +458,282 @@ x1x1x1Command.TextSize = 16
 x1x1x1Command.TextXAlignment = Enum.TextXAlignment.Left
 x1x1x1Command.Parent = scrollFrame
 
+-- Padding do comando 1x1x1
 local x1x1x1Padding = Instance.new("UIPadding")
 x1x1x1Padding.PaddingLeft = UDim.new(0, 10)
 x1x1x1Padding.Parent = x1x1x1Command
 
+-- Arredondar cantos do comando
 local x1x1x1Corner = Instance.new("UICorner")
 x1x1x1Corner.CornerRadius = UDim.new(0, 8)
 x1x1x1Corner.Parent = x1x1x1Command
 
+-- Borda neon amarela no comando 1x1x1
 local x1x1x1Stroke = Instance.new("UIStroke")
-x1x1x1Stroke.Color = Color3.fromRGB(255, 255, 0)
+x1x1x1Stroke.Color = Color3.fromRGB(255, 255, 0) -- Amarelo
 x1x1x1Stroke.Thickness = 2
 x1x1x1Stroke.Transparency = 0
 x1x1x1Stroke.Parent = x1x1x1Command
 
+-- Atualizar CanvasSize do scroll
 scrollFrame.CanvasSize = UDim2.new(0, 0, 0, 415)
 
-local isOpen = false
+-- ============================================
+-- FRAME EXPANDIDO DA LISTA DE TP
+-- ============================================
 
+local tpListFrame = Instance.new("Frame")
+tpListFrame.Name = "TPListFrame"
+tpListFrame.Size = UDim2.new(0, 500, 0, 400)
+tpListFrame.Position = UDim2.new(0.5, -250, 0.5, -200)
+tpListFrame.BackgroundColor3 = Color3.fromRGB(15, 15, 15)
+tpListFrame.BorderSizePixel = 0
+tpListFrame.Visible = false
+tpListFrame.Parent = screenGui
+
+-- Arredondar cantos
+local tpListCorner = Instance.new("UICorner")
+tpListCorner.CornerRadius = UDim.new(0, 15)
+tpListCorner.Parent = tpListFrame
+
+-- Borda neon
+local tpListStroke = Instance.new("UIStroke")
+tpListStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
+tpListStroke.Thickness = 3
+tpListStroke.Transparency = 0
+tpListStroke.Parent = tpListFrame
+
+-- Título da lista de TP
+local tpListTitle = Instance.new("TextLabel")
+tpListTitle.Name = "TPListTitle"
+tpListTitle.Size = UDim2.new(1, 0, 0, 50)
+tpListTitle.Position = UDim2.new(0, 0, 0, 0)
+tpListTitle.BackgroundColor3 = Color3.fromRGB(25, 25, 25)
+tpListTitle.BorderSizePixel = 0
+tpListTitle.Font = Enum.Font.GothamBold
+tpListTitle.Text = "Lista de Teleportes"
+tpListTitle.TextColor3 = Color3.fromRGB(255, 100, 200) -- Rosa neon
+tpListTitle.TextSize = 20
+tpListTitle.TextStrokeTransparency = 0
+tpListTitle.Parent = tpListFrame
+
+-- Padding do título
+local tpTitlePadding = Instance.new("UIPadding")
+tpTitlePadding.PaddingLeft = UDim.new(0, 15)
+tpTitlePadding.Parent = tpListTitle
+
+-- Arredondar cantos do título
+local tpTitleCorner = Instance.new("UICorner")
+tpTitleCorner.CornerRadius = UDim.new(0, 15)
+tpTitleCorner.Parent = tpListTitle
+
+-- Botão para fechar lista de TP
+local closeTPListButton = Instance.new("TextButton")
+closeTPListButton.Name = "CloseTPListButton"
+closeTPListButton.Size = UDim2.new(0, 40, 0, 40)
+closeTPListButton.Position = UDim2.new(1, -45, 0, 5)
+closeTPListButton.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+closeTPListButton.BorderSizePixel = 0
+closeTPListButton.Font = Enum.Font.GothamBold
+closeTPListButton.Text = "<"
+closeTPListButton.TextColor3 = Color3.fromRGB(255, 100, 200) -- Rosa neon
+closeTPListButton.TextSize = 20
+closeTPListButton.Parent = tpListTitle
+
+-- Arredondar cantos do botão fechar
+local closeTPListCorner = Instance.new("UICorner")
+closeTPListCorner.CornerRadius = UDim.new(0, 8)
+closeTPListCorner.Parent = closeTPListButton
+
+-- Borda neon no botão fechar
+local closeTPListStroke = Instance.new("UIStroke")
+closeTPListStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
+closeTPListStroke.Thickness = 2
+closeTPListStroke.Transparency = 0
+closeTPListStroke.Parent = closeTPListButton
+
+-- Frame com scroll para lista de TP
+local tpScrollFrame = Instance.new("ScrollingFrame")
+tpScrollFrame.Name = "TPScrollFrame"
+tpScrollFrame.Size = UDim2.new(0.9, 0, 0, 330)
+tpScrollFrame.Position = UDim2.new(0.05, 0, 0, 60)
+tpScrollFrame.BackgroundColor3 = Color3.fromRGB(20, 20, 20)
+tpScrollFrame.BorderSizePixel = 0
+tpScrollFrame.ScrollBarThickness = 6
+tpScrollFrame.ScrollBarImageColor3 = Color3.fromRGB(180, 100, 255) -- Roxo neon
+tpScrollFrame.CanvasSize = UDim2.new(0, 0, 0, 0)
+tpScrollFrame.Parent = tpListFrame
+
+-- Arredondar cantos do scroll
+local tpScrollCorner = Instance.new("UICorner")
+tpScrollCorner.CornerRadius = UDim.new(0, 10)
+tpScrollCorner.Parent = tpScrollFrame
+
+-- Borda neon no scroll
+local tpScrollStroke = Instance.new("UIStroke")
+tpScrollStroke.Color = Color3.fromRGB(255, 100, 200) -- Rosa neon
+tpScrollStroke.Thickness = 2
+tpScrollStroke.Transparency = 0.5
+tpScrollStroke.Parent = tpScrollFrame
+
+-- Layout para organizar os locais de TP
+local tpListLayout = Instance.new("UIListLayout")
+tpListLayout.SortOrder = Enum.SortOrder.LayoutOrder
+tpListLayout.Padding = UDim.new(0, 8)
+tpListLayout.Parent = tpScrollFrame
+
+-- Padding interno do scroll
+local tpScrollPadding = Instance.new("UIPadding")
+tpScrollPadding.PaddingTop = UDim.new(0, 10)
+tpScrollPadding.PaddingBottom = UDim.new(0, 10)
+tpScrollPadding.PaddingLeft = UDim.new(0, 10)
+tpScrollPadding.PaddingRight = UDim.new(0, 10)
+tpScrollPadding.Parent = tpScrollFrame
+
+-- ============================================
+-- LISTA DE LOCAIS PARA TELEPORTE
+-- ============================================
+
+local locations = {
+    ["Salão de Beleza"] = Vector3.new(-76, 4, -123),
+    ["Local do Sofá"] = Vector3.new(-82, 22, -128),
+    ["Doceria"] = Vector3.new(-125, 6, -120),
+    ["Lugar de Jogos"] = Vector3.new(-172, 1, -126),
+    ["Delegacia"] = Vector3.new(-121, 4, 31),
+    ["Hospital"] = Vector3.new(-293, 4, 40),
+    ["Banco Comum"] = Vector3.new(-358, 25, -143),
+    ["Bombeiros"] = Vector3.new(-469, 6, -122),
+    ["Cemitério"] = Vector3.new(-486, 7, 56),
+    ["Escola"] = Vector3.new(-315, 6, 211),
+    ["Creche"] = Vector3.new(-157, 4, 125),
+    ["Local das Caixas"] = Vector3.new(-162, 4, 268),
+    ["Local de Lanches Espanhóis"] = Vector3.new(-169, 20, 291),
+    ["Livraria"] = Vector3.new(-129, 4, 259),
+    ["Celulares"] = Vector3.new(-127, 21, 253),
+    ["Coffes"] = Vector3.new(-96, 5, 250),
+    ["Veterinário"] = Vector3.new(-100, 22, 262),
+    ["Dentista"] = Vector3.new(-53, 20, 268),
+    ["Novo Banco"] = Vector3.new(3, 4, 257),
+    ["Hotel"] = Vector3.new(199, 2, 182),
+    ["Hamburgueria"] = Vector3.new(156, 8, 39),
+    ["Aeroporto"] = Vector3.new(317, 7, 40),
+    ["Shopping"] = Vector3.new(165, 5, -158),
+    ["Apartamento 1"] = Vector3.new(-35, 20, -126),
+    ["Apartamento 2"] = Vector3.new(-34, 37, -136),
+    ["Igreja"] = Vector3.new(-64, 37, -192),
+    ["Praia Guarda-Chuva Azul"] = Vector3.new(70, 8, -1433),
+    ["Casa Abandonada"] = Vector3.new(1044, 8, 54),
+    ["Casa de Máquinas"] = Vector3.new(235, 4, 813),
+    ["Praia Normal"] = Vector3.new(-218, 1, 760),
+    ["Iate"] = Vector3.new(-125, 33, 856),
+    ["Cabana"] = Vector3.new(-249, 6, 1078),
+    ["Praia Guarda-Chuva Vermelho"] = Vector3.new(15, 4, 1460),
+    ["Drones"] = Vector3.new(-680, 252, 762),
+    ["Fazenda 1"] = Vector3.new(-851, 6, -57),
+    ["Fazenda 2"] = Vector3.new(-863, 6, -375),
+    ["Praça"] = Vector3.new(-13, 6, -17),
+    ["Montanha"] = Vector3.new(-580, 1, 1026),
+    ["Posto de Gasolina"] = Vector3.new(133, 2, -338),
+    ["Loja de Roupas"] = Vector3.new(-39, 2, 255)
+}
+
+-- Função para criar botões de teleporte
+local function createTPButton(locationName, position, order)
+    local button = Instance.new("TextButton")
+    button.Name = locationName .. "Button"
+    button.Size = UDim2.new(1, -20, 0, 35)
+    button.BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    button.BorderSizePixel = 0
+    button.Font = Enum.Font.GothamBold
+    button.Text = "/tp " .. locationName
+    button.TextColor3 = Color3.fromRGB(255, 255, 255)
+    button.TextSize = 14
+    button.TextXAlignment = Enum.TextXAlignment.Left
+    button.LayoutOrder = order
+    button.Parent = tpScrollFrame
+
+    -- Padding do botão
+    local buttonPadding = Instance.new("UIPadding")
+    buttonPadding.PaddingLeft = UDim.new(0, 10)
+    buttonPadding.Parent = button
+
+    -- Arredondar cantos do botão
+    local buttonCorner = Instance.new("UICorner")
+    buttonCorner.CornerRadius = UDim.new(0, 8)
+    buttonCorner.Parent = button
+
+    -- Borda neon alternada
+    local buttonStroke = Instance.new("UIStroke")
+    if order % 2 == 0 then
+        buttonStroke.Color = Color3.fromRGB(255, 100, 200) -- Rosa neon
+    else
+        buttonStroke.Color = Color3.fromRGB(180, 100, 255) -- Roxo neon
+    end
+    buttonStroke.Thickness = 2
+    buttonStroke.Transparency = 0
+    buttonStroke.Parent = button
+
+    -- Função de teleporte
+    button.MouseButton1Click:Connect(function()
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso")
+        
+        if humanoidRootPart then
+            humanoidRootPart.CFrame = CFrame.new(position)
+            systemMessage("Teleportado para: " .. locationName)
+        else
+            systemMessage("Erro: Não foi possível encontrar HumanoidRootPart")
+        end
+    end)
+
+    -- Efeito de hover
+    button.MouseEnter:Connect(function()
+        local tweenInfo = TweenInfo.new(0.2)
+        local tween = TweenService:Create(button, tweenInfo, {
+            BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+        })
+        tween:Play()
+    end)
+
+    button.MouseLeave:Connect(function()
+        local tweenInfo = TweenInfo.new(0.2)
+        local tween = TweenService:Create(button, tweenInfo, {
+            BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+        })
+        tween:Play()
+    end)
+end
+
+-- Criar botões para todos os locais
+local order = 1
+for locationName, position in pairs(locations) do
+    createTPButton(locationName, position, order)
+    order = order + 1
+end
+
+-- Ajustar CanvasSize baseado no número de locais
+tpScrollFrame.CanvasSize = UDim2.new(0, 0, 0, order * 43)
+
+-- ============================================
+-- SISTEMA DE CONTROLE DA INTERFACE
+-- ============================================
+
+-- Variável para controlar se a interface está aberta
+local isOpen = false
+local isTPListOpen = false
+
+-- Função para abrir/fechar a interface principal
 local function toggleInterface()
+    if isTPListOpen then
+        toggleTPList()
+        return
+    end
+    
     isOpen = not isOpen
     
     if isOpen then
         mainFrame.Visible = true
+        -- Animação de entrada
         mainFrame.Size = UDim2.new(0, 0, 0, 0)
         mainFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
         
@@ -409,6 +744,7 @@ local function toggleInterface()
         })
         tween:Play()
     else
+        -- Animação de saída
         local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In)
         local tween = TweenService:Create(mainFrame, tweenInfo, {
             Size = UDim2.new(0, 0, 0, 0),
@@ -421,8 +757,48 @@ local function toggleInterface()
     end
 end
 
-mainButton.MouseButton1Click:Connect(toggleInterface)
+-- Função para abrir/fechar a lista de TP
+local function toggleTPList()
+    isTPListOpen = not isTPListOpen
+    
+    if isTPListOpen then
+        -- Fechar interface principal se estiver aberta
+        if isOpen then
+            isOpen = false
+            mainFrame.Visible = false
+        end
+        
+        tpListFrame.Visible = true
+        -- Animação de entrada
+        tpListFrame.Size = UDim2.new(0, 0, 0, 0)
+        tpListFrame.Position = UDim2.new(0.5, 0, 0.5, 0)
+        
+        local tweenInfo = TweenInfo.new(0.3, Enum.EasingStyle.Back, Enum.EasingDirection.Out)
+        local tween = TweenService:Create(tpListFrame, tweenInfo, {
+            Size = UDim2.new(0, 500, 0, 400),
+            Position = UDim2.new(0.5, -250, 0.5, -200)
+        })
+        tween:Play()
+    else
+        -- Animação de saída
+        local tweenInfo = TweenInfo.new(0.2, Enum.EasingStyle.Back, Enum.EasingDirection.In)
+        local tween = TweenService:Create(tpListFrame, tweenInfo, {
+            Size = UDim2.new(0, 0, 0, 0),
+            Position = UDim2.new(0.5, 0, 0.5, 0)
+        })
+        tween:Play()
+        tween.Completed:Connect(function()
+            tpListFrame.Visible = false
+        end)
+    end
+end
 
+-- Conectar eventos
+mainButton.MouseButton1Click:Connect(toggleInterface)
+expandButton.MouseButton1Click:Connect(toggleTPList)
+closeTPListButton.MouseButton1Click:Connect(toggleTPList)
+
+-- Sistema de arrastar o botão LY
 local dragging = false
 local dragInput
 local dragStart
@@ -459,6 +835,7 @@ UserInputService.InputChanged:Connect(function(input)
     end
 end)
 
+-- Efeito de hover no botão principal
 mainButton.MouseEnter:Connect(function()
     local tweenInfo = TweenInfo.new(0.2)
     local tween = TweenService:Create(mainButton, tweenInfo, {
@@ -477,7 +854,45 @@ mainButton.MouseLeave:Connect(function()
     tween:Play()
 end)
 
+-- Efeito de hover no botão expandir
+expandButton.MouseEnter:Connect(function()
+    local tweenInfo = TweenInfo.new(0.2)
+    local tween = TweenService:Create(expandButton, tweenInfo, {
+        BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    })
+    tween:Play()
+end)
+
+expandButton.MouseLeave:Connect(function()
+    local tweenInfo = TweenInfo.new(0.2)
+    local tween = TweenService:Create(expandButton, tweenInfo, {
+        BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    })
+    tween:Play()
+end)
+
+-- Efeito de hover no botão fechar lista TP
+closeTPListButton.MouseEnter:Connect(function()
+    local tweenInfo = TweenInfo.new(0.2)
+    local tween = TweenService:Create(closeTPListButton, tweenInfo, {
+        BackgroundColor3 = Color3.fromRGB(40, 40, 40)
+    })
+    tween:Play()
+end)
+
+closeTPListButton.MouseLeave:Connect(function()
+    local tweenInfo = TweenInfo.new(0.2)
+    local tween = TweenService:Create(closeTPListButton, tweenInfo, {
+        BackgroundColor3 = Color3.fromRGB(30, 30, 30)
+    })
+    tween:Play()
+end)
+
 print("Lyra Admin FE carregado com sucesso!")
+
+-- ============================================
+-- SISTEMA DE MENSAGENS
+-- ============================================
 
 local function systemMessage(text)
     pcall(function()
@@ -489,6 +904,10 @@ local function systemMessage(text)
         })
     end)
 end
+
+-- ============================================
+-- SCRIPT DE COMANDO TP
+-- ============================================
 
 local function findPlayersByNameOrDisplay(query)
     query = tostring(query):lower()
@@ -560,6 +979,20 @@ local function handleChat(msg)
         return
     end
 
+    -- Verificar se é um local da lista
+    if locations[targetQuery] then
+        local character = player.Character or player.CharacterAdded:Wait()
+        local humanoidRootPart = character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso")
+        
+        if humanoidRootPart then
+            humanoidRootPart.CFrame = CFrame.new(locations[targetQuery])
+            systemMessage("Teleportado para: " .. targetQuery)
+        else
+            systemMessage("Erro: Não foi possível encontrar HumanoidRootPart")
+        end
+        return
+    end
+
     local matches = findPlayersByNameOrDisplay(targetQuery)
     if #matches == 0 then
         systemMessage("Jogador não encontrado: " .. targetQuery)
@@ -584,6 +1017,10 @@ end
 
 player.Chatted:Connect(handleChat)
 
+-- ============================================
+-- SCRIPT DE COMANDO SPEED
+-- ============================================
+
 local function handleSpeedCommand(args)
     local rawValue = args[2]
     local value = tonumber(rawValue)
@@ -605,6 +1042,10 @@ local function handleSpeedCommand(args)
     humanoid.WalkSpeed = value
     systemMessage("Velocidade definida para " .. tostring(value))
 end
+
+-- ============================================
+-- SCRIPT DE COMANDO JUMPBOOST
+-- ============================================
 
 local function handleJumpBoostCommand(args)
     local rawValue = args[2]
@@ -628,6 +1069,10 @@ local function handleJumpBoostCommand(args)
     humanoid.JumpPower = value
     systemMessage("JumpPower definido para " .. tostring(value))
 end
+
+-- ============================================
+-- SCRIPT DE COMANDOS LOOPGOTO E UNLOOPGOTO
+-- ============================================
 
 local RunService = game:GetService("RunService")
 local activeTarget = nil
@@ -716,6 +1161,10 @@ local function startLoopGoto(targetPlayer, dist)
     end)
 end
 
+-- ============================================
+-- SCRIPT DE COMANDO GOJO
+-- ============================================
+
 local function handleGojoCommand()
     systemMessage("Executando /gojo...")
 
@@ -726,11 +1175,13 @@ local function handleGojoCommand()
         end
 
         local url = "https://raw.githubusercontent.com/BRENOPOOF/Main.txt/refs/heads/main/Main.txt"
+        -- Tenta obter o código remoto
         local success, code = pcall(function() return game:HttpGet(url) end)
         if not success or type(code) ~= "string" then
             error("Falha ao obter o código remoto.")
         end
 
+        -- Compila e executa
         local func = loader(code)
         if type(func) == "function" then
             func()
@@ -745,6 +1196,10 @@ local function handleGojoCommand()
         systemMessage("/gojo executado com sucesso.")
     end
 end
+
+-- ============================================
+-- SCRIPT DE COMANDO GONER
+-- ============================================
 
 local function handleGonerCommand()
     systemMessage("Tentando executar /goner...")
@@ -782,6 +1237,10 @@ local function handleGonerCommand()
     end
 end
 
+-- ============================================
+-- SCRIPT DE COMANDO COOLKID
+-- ============================================
+
 local function handleCoolkidCommand()
     systemMessage("Tentando executar /coolkid...")
 
@@ -818,17 +1277,23 @@ local function handleCoolkidCommand()
     end
 end
 
+-- ============================================
+-- SCRIPT DE COMANDO 1x1x1
+-- ============================================
+
 local function handle1x1x1Command()
     systemMessage("Executando /1x1x1...")
 
     local ok, err = pcall(function()
         local URL = "https://raw.githubusercontent.com/puppetn89-dotcom/1x1x1/refs/heads/main/Main.txt"
         
+        -- Baixa o script com proteção pcall
         local ok, content = pcall(function() return game:HttpGet(URL) end)
         if not ok then
             error("Falha ao baixar o script: "..tostring(content))
         end
 
+        -- Executa com pcall para capturar erros de runtime
         local ok2, err = pcall(function() loadstring(content)() end)
         if not ok2 then
             error("Erro ao executar o script: "..tostring(err))
@@ -841,6 +1306,10 @@ local function handle1x1x1Command()
         systemMessage("/1x1x1 executado com sucesso.")
     end
 end
+
+-- ============================================
+-- SISTEMA PRINCIPAL DE COMANDOS
+-- ============================================
 
 player.Chatted:Connect(function(msg)
     if type(msg) ~= "string" then return end
@@ -900,3 +1369,155 @@ player.Chatted:Connect(function(msg)
 end)
 
 systemMessage("Lyra Admin FE ativo! Use /tp [nick], /speed, /jumpboost, /loopgoto, /unloopgoto, /gojo, /goner, /coolkid, /1x1x1")
+
+-- Coloque este Script em: ServerScriptService
+-- Uso: digite no chat: /tp <nome do local>
+-- Ex.: /tp Iate  ou /tp "Salão de Beleza" (aspas não necessárias)
+
+local ReplicatedStorage = game:GetService("ReplicatedStorage")
+local Players = game:GetService("Players")
+
+-- RemoteEvent para feedback ao jogador
+local REMOTE_NAME = "TPFeedback"
+local tpRemote = ReplicatedStorage:FindFirstChild(REMOTE_NAME)
+if not tpRemote then
+    tpRemote = Instance.new("RemoteEvent")
+    tpRemote.Name = REMOTE_NAME
+    tpRemote.Parent = ReplicatedStorage
+end
+
+local locations = {
+    ["Salão de Beleza"] = Vector3.new(-76, 4, -123),
+    ["Local do Sofá"] = Vector3.new(-82, 22, -128),
+    ["Doceria"] = Vector3.new(-125, 6, -120),
+    ["Lugar de Jogos"] = Vector3.new(-172, 1, -126),
+    ["Delegacia"] = Vector3.new(-121, 4, 31),
+    ["Hospital"] = Vector3.new(-293, 4, 40),
+    ["Banco Comum"] = Vector3.new(-358, 25, -143),
+    ["Bombeiros"] = Vector3.new(-469, 6, -122),
+    ["Cemitério"] = Vector3.new(-486, 7, 56),
+    ["Escola"] = Vector3.new(-315, 6, 211),
+    ["Creche"] = Vector3.new(-157, 4, 125),
+    ["Local das Caixas"] = Vector3.new(-162, 4, 268),
+    ["Local de Lanches Espanhóis"] = Vector3.new(-169, 20, 291),
+    ["Livraria"] = Vector3.new(-129, 4, 259),
+    ["Celulares"] = Vector3.new(-127, 21, 253),
+    ["Coffes"] = Vector3.new(-96, 5, 250),
+    ["Veterinário"] = Vector3.new(-100, 22, 262),
+    ["Dentista"] = Vector3.new(-53, 20, 268),
+    ["Novo Banco"] = Vector3.new(3, 4, 257),
+    ["Hotel"] = Vector3.new(199, 2, 182),
+    ["Hamburgueria"] = Vector3.new(156, 8, 39),
+    ["Aeroporto"] = Vector3.new(317, 7, 40),
+    ["Shopping"] = Vector3.new(165, 5, -158),
+    ["Apartamento 1"] = Vector3.new(-35, 20, -126),
+    ["Apartamento 2"] = Vector3.new(-34, 37, -136),
+    ["Igreja"] = Vector3.new(-64, 37, -192),
+    ["Praia Guarda-Chuva Azul"] = Vector3.new(70, 8, -1433),
+    ["Casa Abandonada"] = Vector3.new(1044, 8, 54),
+    ["Casa de Máquinas"] = Vector3.new(235, 4, 813),
+    ["Praia Normal"] = Vector3.new(-218, 1, 760),
+    ["Iate"] = Vector3.new(-125, 33, 856),
+    ["Cabana"] = Vector3.new(-249, 6, 1078),
+    ["Praia Guarda-Chuva Vermelho"] = Vector3.new(15, 4, 1460),
+    ["Drones"] = Vector3.new(-680, 252, 762),
+    ["Fazenda 1"] = Vector3.new(-851, 6, -57),
+    ["Fazenda 2"] = Vector3.new(-863, 6, -375),
+    ["Praça"] = Vector3.new(-13, 6, -17),
+    ["Montanha"] = Vector3.new(-580, 1, 1026),
+    ["Posto de Gasolina"] = Vector3.new(133, 2, -338),
+    ["Loja de Roupas"] = Vector3.new(-39, 2, 255)
+}
+
+-- Normaliza string: lowercase, remove acentos e pontuação (deixa só alfanumérico e espaços)
+local function normalize(str)
+    if not str then return "" end
+    str = tostring(str):lower()
+    local accents = {
+        ["á"]="a", ["à"]="a", ["ã"]="a", ["â"]="a", ["ä"]="a",
+        ["é"]="e", ["è"]="e", ["ê"]="e", ["ë"]="e",
+        ["í"]="i", ["ì"]="i", ["î"]="i", ["ï"]="i",
+        ["ó"]="o", ["ò"]="o", ["õ"]="o", ["ô"]="o", ["ö"]="o",
+        ["ú"]="u", ["ù"]="u", ["û"]="u", ["ü"]="u",
+        ["ç"]="c"
+    }
+    for a,b in pairs(accents) do
+        str = str:gsub(a, b)
+    end
+    -- remover caracteres não alfanuméricos, exceto espaço
+    str = str:gsub("[^%w%s]", "")
+    -- trim
+    str = str:match("^%s*(.-)%s*$") or str
+    return str
+end
+
+-- mapa normalizado -> nome original
+local normMap = {}
+for name,_ in pairs(locations) do
+    normMap[normalize(name)] = name
+end
+
+local function sendFeedback(player, text)
+    if tpRemote then
+        tpRemote:FireClient(player, tostring(text))
+    end
+end
+
+local function tryTeleport(player, query)
+    if not query or query == "" then
+        sendFeedback(player, "Uso: /tp <nome do local>")
+        return
+    end
+
+    local q = normalize(query)
+    -- tentativa direta por mapa normalizado
+    local realName = normMap[q]
+    if not realName then
+        -- busca por substring (permite digitar parte do nome)
+        for nk, orig in pairs(normMap) do
+            if nk:find(q, 1, true) then
+                realName = orig
+                break
+            end
+        end
+    end
+
+    if not realName then
+        sendFeedback(player, "Local não encontrado: " .. query)
+        return
+    end
+
+    local pos = locations[realName]
+    if not pos then
+        sendFeedback(player, "Coordenada não encontrada para: " .. realName)
+        return
+    end
+
+    local character = player.Character or player.CharacterAdded:Wait()
+    local hrp = character:FindFirstChild("HumanoidRootPart") or character:FindFirstChild("Torso") or character:FindFirstChild("UpperTorso")
+    if not hrp then
+        sendFeedback(player, "Personagem não encontrada para teleport.")
+        return
+    end
+
+    -- teleport seguro (eleva 3 studs)
+    hrp.CFrame = CFrame.new(pos + Vector3.new(0, 3, 0))
+    sendFeedback(player, "Teleportado para: " .. realName)
+end
+
+local function onPlayerAdded(player)
+    player.Chatted:Connect(function(msg)
+        if not msg then return end
+        local cmd, rest = msg:match("^(/%S+)%s*(.*)$")
+        if not cmd then return end
+        if cmd:lower() == "/tp" then
+            tryTeleport(player, rest or "")
+        end
+    end)
+end
+
+-- conectar para jogadores já presentes e futuros
+for _, p in pairs(Players:GetPlayers()) do
+    onPlayerAdded(p)
+end
+Players.PlayerAdded:Connect(onPlayerAdded)
